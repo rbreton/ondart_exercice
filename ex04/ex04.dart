@@ -1,8 +1,8 @@
-import 'dart:math' as M;
+import 'dart:math' as Math;
 
 void main(){
   print(fibonacci(11));
-  //print(endPointLine(980, 660, 120, 33));
+  print(endPointLine(980, 660, 120, 33));
   print(passedTimeBetween(new DateTime(1991, 09, 22, 0, 0)));
   print(investment(10, 1000.00, 3.3));
   print(timesTable(12, 20));
@@ -25,9 +25,15 @@ String fibonacci(int intNI){
   return strPrint + '\n';
 }
 
-String endPointLine(int intW, int intH){
+String endPointLine(int intW, int intH, int intL, int intD){
   String strPrint = '#2  :\n ';
-  
+  double dblCenterX = intW / 2;
+  double dblCenterY = intH / 2;
+  double dblR = intD * (Math.PI / 180);
+  double dblEndLineX = intW / 2 + 120 * Math.cos(dblR);
+  double dblEndLineY = intH / 2 + 120 * Math.sin(dblR);
+  strPrint += 'Centre : ${dblCenterX.toStringAsFixed(2)}, ${dblCenterY.toStringAsFixed(2)}\n ';
+  strPrint += 'Fin de la ligne : ${dblEndLineX.toStringAsFixed(2)}, ${dblEndLineY.toStringAsFixed(2)}';
   return strPrint + '\n';
 }
 
@@ -38,9 +44,13 @@ String passedTimeBetween(DateTime dtBirthday){
   DateTime dtNow = new DateTime.now();
   String strPrint = "#3 Temps passé entre le $dtBirthday et aujourd'hui le $dtNow :\n ";
   
-  
   Duration drtPassedTime = dtNow.difference(dtBirthday);
-  strPrint += drtPassedTime.inDays.toString() + ' jours';
+  
+  int intDaysPassed = drtPassedTime.inDays;
+  int intY = (intDaysPassed / 365).truncate();
+  int intM = ((intDaysPassed - (365 * intY)) / 30).truncate();
+  int intD = (intDaysPassed - (365 * intY)) - (30 * intM);
+  strPrint += '$intY ans, $intM mois et $intD jours';
   return strPrint + '\n';
 }
 
