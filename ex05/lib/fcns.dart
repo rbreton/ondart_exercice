@@ -4,7 +4,7 @@ String onlyLetters(String strText){
   String strReturn;
   RegExp exp = new RegExp(r"^[a-zA-Z ]*$");
   strReturn = exp.hasMatch(strText).toString();
-  return strReturn;
+  return strReturn + '\n';
 }
 String longestSentenceIn(String strText){
   String strReturn = '';
@@ -16,7 +16,7 @@ String longestSentenceIn(String strText){
     }
   }
   strReturn = lstSentence[intLongestPosition].toString() + '.';
-  return strReturn;
+  return strReturn + '\n';
 }
 String longestWordIn(String strText){
   String strReturn = '';
@@ -27,8 +27,12 @@ String longestWordIn(String strText){
       intLongestPosition = n;
     }
   }
-  strReturn = lstWord[intLongestPosition].toString();
-  return strReturn;
+  String longestWord = lstWord[intLongestPosition];
+  /*if(longestWord[0] == '.'){
+    longestWord.removeAt(0);
+  }*/
+  strReturn = longestWord;
+  return strReturn + '\n';
 }
 String timesTable(int intTimesTable){
   String strReturn = '';
@@ -43,6 +47,7 @@ String timesTable(int intTimesTable){
 String displayTree(int intHeight){
   String strReturn = '';
   int intCptSpacer = intHeight;
+  int intOld = 1;
   for (int n = 1; n <= intHeight; n++){
     String strSpacer = '';
     for (int m = 1; m<= intCptSpacer; m++){
@@ -50,9 +55,10 @@ String displayTree(int intHeight){
     }
     intCptSpacer--;
     strReturn += strSpacer;
-    for (int o = 1; o <= n; o++){
+    for (int o = 1; o <= intOld; o++){
       strReturn += '*';
     }
+    intOld += 2;
     strReturn += '\n';
   }
   return strReturn;
