@@ -5,32 +5,58 @@ String txtFormat(String strCharToFormat){
   if (mapUnwantedCharacter[strCharToFormat] != null) {
     strCharFormated = mapUnwantedCharacter[strCharToFormat];
   }
-  return strCharFormated;
+  return strCharFormated.toLowerCase();
 }
 String palindrome(String strTxt){
   String strReturn = '';
-  String strTxtNoSpace = strTxt.replaceAll(new RegExp(r'[\.,-\/#!$%\^&\*;:{}=\-_`~() ]'), '');
+  String strTxtNoSpace = strTxt.replaceAll(new RegExp('[!"#\$%&\\\'()*+,-.\/:;?@[\\\]_`{|}~ ]'), '');
   List lstTxtToCharacter = strTxtNoSpace.split('');
-  lstTxtToCharacter.forEach(txtFormat);
-  print(lstTxtToCharacter);
+  List lstTxtFormated = new List();
+  for(int intI = 0; intI < lstTxtToCharacter.length; intI++){
+    lstTxtFormated.add(txtFormat(lstTxtToCharacter[intI]));
+  }
+    
+  /* -------- Besoin d'explication sur les foreach{} --------- */
+  //lstTxtToCharacter.forEach(txtFormat);
+  int intStart = 0;
+  int intEnd = lstTxtFormated.length-1;
+  int intLength = ((lstTxtFormated.length) / 2).floor();
+  bool bolStateTxt = true;
+  for(int intJ = 0; intJ < intLength; intJ++){
+    if(intStart < intEnd){
+      if(lstTxtFormated[intStart] != lstTxtFormated[intEnd]){
+        bolStateTxt = false;
+      }
+    }
+    intStart++;
+    intEnd--;
+  }
+  if(bolStateTxt){
+    strReturn += 'Ce texte : « $strTxt » est un palindrome.';
+  }else{
+    strReturn += "Ce texte : « $strTxt » n'est pas un palindrome.";
+  }
   return strReturn + '\n';
+}
+String getPlural(int intCount, String strLetter){
+  if(intCount > 1){return strLetter;}else{return '';};
 }
 String numDaysBetween(DateTime dtFirstDate, DateTime dtSecondDate){
   String strReturn = '';
-  /*Duration drtPassedTime = dtSecondDate.difference(dtFirstDate);
-  
+  List lstMois = ['janvier','février','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+  Duration drtPassedTime = dtSecondDate.difference(dtFirstDate);
   int intDaysPassed = drtPassedTime.inDays;
-  strReturn = 'Il y a $intDaysPassed';*/
+  strReturn = 'Il y a $intDaysPassed jour${getPlural(intDaysPassed, 's')} entre le ${dtFirstDate.day} ${lstMois[dtFirstDate.month-1]} ${dtFirstDate.year} et le ${dtSecondDate.day} ${lstMois[dtSecondDate.month-1]} ${dtSecondDate.year}.';
   return strReturn + '\n';
 }
-String convertNumGradesToLetters(){
+String convertNumGradesToLetters(int intNumGrade){
   String strReturn = '';
-
+  
   return strReturn + '\n';
 }
-String getNamelength(){
+String getNamelength(List lstNames){
   String strReturn = '';
-
+  
   return strReturn + '\n';
 }
 String getClubPlayers(){
