@@ -75,13 +75,34 @@ String convertNumGradesToLetters(double dblNumGrade){
   strReturn += '.';
   return strReturn + '\n';
 }
-String getNamelength(List lstNames){
+String sortNameByLength(List lstNames){
   String strReturn = '';
-  
+  List lstShort = new List();
+  List lstLong = new List();
+  List lstEqual = new List();
+  void getSortNameByLength(value){
+    if(value.length < 8){
+      lstShort.add(value);
+    }
+    if(value.length > 8){
+      lstLong.add(value);
+    }
+    if(value.length == 8){
+      lstEqual.add(value);
+    }
+  }
+  lstNames.forEach(getSortNameByLength);
+  strReturn += 'Il y a ${lstShort.length} nom${getPlural(lstShort.length, 's')} avec moins que 8 caracteres.\n';
+  strReturn += 'Il y a ${lstEqual.length} nom${getPlural(lstEqual.length, 's')} avec 8 caracteres.\n';
+  strReturn += 'Il y a ${lstLong.length} nom${getPlural(lstLong.length, 's')} avec plus que 8 caracteres.\n';
+  strReturn += '< 8 : $lstShort\n';
+  strReturn += '= 8 : $lstEqual\n';
+  strReturn += '> 8 : $lstLong\n';
   return strReturn + '\n';
 }
-String getClubPlayers(){
+String getClubPlayers(List lstNamesPlayers, List lstNamesClubs){
   String strReturn = '';
-
+  lstNamesClubs.sort();
+  print(lstNamesClubs);
   return strReturn + '\n';
 }
