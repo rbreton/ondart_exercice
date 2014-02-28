@@ -102,7 +102,21 @@ String sortNameByLength(List lstNames){
 }
 String getClubPlayers(List lstNamesPlayers, List lstNamesClubs){
   String strReturn = '';
+  int intNumPlayerPerClub = (lstNamesPlayers.length / lstNamesClubs.length).floor();
+  int intNumPlayer = intNumPlayerPerClub;
+  int intCpt = 0;
+  Map mapClubsPlayers = new Map();
   lstNamesClubs.sort();
-  print(lstNamesClubs);
+  void creatClubs(value){
+    mapClubsPlayers[value] = new List();
+    print(intCpt);
+    print(intNumPlayer);
+    for(intCpt; intCpt < intNumPlayer; intCpt++){
+      mapClubsPlayers[value].add(lstNamesPlayers[intCpt]);
+    }
+    intNumPlayer += intNumPlayerPerClub;
+  }
+  lstNamesClubs.forEach(creatClubs);
+  print(mapClubsPlayers);
   return strReturn + '\n';
 }
